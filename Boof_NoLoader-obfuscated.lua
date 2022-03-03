@@ -107,57 +107,54 @@ function on_draw_watermark()
     end
 end
 
--- -- Indicators
--- -- local hideShots = menu.find("aimbot","general","exploits","hideshots")
--- -- client.log(hideShots:set(false))
+-- Indicators
+-- local hideShots = menu.find("aimbot","general","exploits","hideshots")
+-- client.log(hideShots:set(false))
 
--- local function normalize(yaw) 
---     return math.fmod(yaw + 180, 360) - 180;
--- end
+local function normalize(yaw) 
+    return math.fmod(yaw + 180, 360) - 180;
+end
+local function map_var( value, min, max )
+    return ( value - min ) / ( max - min )
+end
 
--- local function map_var( value, min, max )
---     return ( value - min ) / ( max - min )
--- end
+function draw_indicators()
+    if(engine.is_in_game() and menuItems.desyncIndicator:get()) then
+        max_desync = math.abs( antiaim.get_max_desync_range( ) )
+        cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
+        -- boof logo
+        local text_size = render.get_text_size(vars.indicator_font, "boof")
+        clipSize = map_var( max_desync, 0, 58 ) * text_size.x
 
--- function draw_indicators()
---     if(engine.is_in_game()) then
---         max_desync = math.abs( antiaim.get_max_desync_range( ) )
---         cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
---         if(menuItems.desyncIndicator:get()) then
---             -- boof logo
---             local text_size = render.get_text_size(vars.indicator_font, "boof")
---             clipSize = map_var( max_desync, 0, 58 ) * text_size.x
+        render.text(vars.indicator_font, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(255, 255, 255, 255), true)
+        render.push_clip(vec2_t(ref.screen_size.x / 2 + 5, ref.screen_size.y / 2 + 280), vec2_t(clipSize, text_size.y))
+        render.text(vars.indicator_font2, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(33, 122, 255, 255), true)
+        render.pop_clip()
 
---             render.text(vars.indicator_font, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(255, 255, 255, 255), true)
---             render.push_clip(vec2_t(ref.screen_size.x / 2 + 5, ref.screen_size.y / 2 + 280), vec2_t(clipSize, text_size.y))
---             render.text(vars.indicator_font2, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(33, 122, 255, 255), true)
---             render.pop_clip()
+        render.rect_filled(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(200,200,200))
+        render.rect(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(0,0,0))
+        render.text(vars.degrees_font, tostring(math.floor(antiaim.get_fake_angle())) .. "°" or "0°", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 380), color_t(33, 122, 255, 255), true)
+        local opacity = 50
+        local color = {
+            255,255,255
+        }
+        if(exploits.get_charge() ~= 0 and exploits.get_charge() ~= 14) then
+            opacity = 100
+        elseif(exploits.get_charge() == 14) then
+            opacity = 200
+            color = {
+                33,122,255
+            }
+        end
+        local opacity2 = 50
 
---             render.rect_filled(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(200,200,200))
---             render.rect(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(0,0,0))
---             render.text(vars.degrees_font, tostring(math.floor(antiaim.get_fake_angle())) .. "°" or "0°", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 380), color_t(33, 122, 255, 255), true)
---             local opacity = 50
---             local color = {
---                 255,255,255
---             }
---             if(exploits.get_charge() ~= 0 and exploits.get_charge() ~= 14) then
---                 opacity = 100
---             elseif(exploits.get_charge() == 14) then
---                 opacity = 200
---                 color = {
---                     33,122,255
---                 }
---             end
---             local opacity2 = 50
-
---             if(hideShots) then
---                 opacity2 = 200
---             end
---             render.text(vars.flags_font, "doubletap", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 410), color_t(color[1], color[2], color[3], opacity), true)
---             render.text(vars.flags_font, "hideshots", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 442), color_t(255, 255, 255, opacity2), true)
---         end
---     end
--- end 
+        if(hideShots) then
+            opacity2 = 200
+        end
+        render.text(vars.flags_font, "doubletap", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 410), color_t(color[1], color[2], color[3], opacity), true)
+        render.text(vars.flags_font, "hideshots", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 442), color_t(255, 255, 255, opacity2), true)
+    end
+end 
 
 -- KillSays
 function killChat(event_info)
@@ -386,6 +383,6 @@ callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 -- callbacks.add(e_callbacks.PAINT, on_paint)
--- callbacks.add(e_callbacks.PAINT, draw_indicators)
+callbacks.add(e_callbacks.PAINT, draw_indicators)
 -- callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
 -- menu.add_button("quick server", "confirm", confirmServer)
