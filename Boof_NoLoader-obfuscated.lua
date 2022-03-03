@@ -67,11 +67,11 @@ local menu = {
     text2 = menu.add_text("welcome", "Thank you for using our scripts."),
     text3 = menu.add_text("welcome","For support please contact us at gg/boof."),
     -- Watermark
-    watermark_toggle = menu.add_checkbox("boof", "enabled", false),
-    watermarkToxic = menu.add_checkbox("boof", "toxic mode", false),
-    watermarkSelector = menu.add_multi_selection("boof", "watermark options", {"name", "fps", "tick", "kills", "ping"}),
+    watermark_toggle = menu.add_checkbox("boof content", "watermark", false),
+    watermarkSelector = menu.add_multi_selection("boof content", "watermark options", {"name", "fps", "tick", "kills", "ping"}),
+    watermarkToxic = menu.add_checkbox("boof content", "toxic mode", false),
     -- Clantag
-    clantag_toggle = menu.add_checkbox("boof", "clantag", false),
+    clantag_toggle = menu.add_checkbox("boof content", "clantag", false),
     -- KillSay
     killSay = menu.add_checkbox("killsay", "killsay", false),
     killSaySetting = menu.add_selection("killsay", "setting", {"boof.gg", "friendly", "anti-ruski","gay","among us"}),
