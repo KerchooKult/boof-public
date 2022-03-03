@@ -1,5 +1,33 @@
 client.log('boof.gg has cloud-loaded')
 
+local servers_community = {
+    ['Heretic | East'] = '74.91.125.35:27015',
+    ['Heretic | West'] = '64.94.101.122:27015',
+    ['Big Steppa | DM'] = '74.91.124.24:27015',
+    ['No Hyper | Scout'] = '192.223.24.31:27015',
+    ['No Hyper | AWP'] = '74.91.123.177:27015',
+    ['Noble | Mirage Only'] = '135.148.136.239:27015',
+    ['Luckys'] = '192.223.26.36:27015',
+    ['Doc HVH'] = '74.91.124.40:27015',
+    ['Rampage HVH'] = '104.192.227.26:27022',
+    ['Profits'] = '135.148.53.7:27015',
+    ['Jinx HVH'] = '162.248.93.4:27015',
+    ['Cobras HVH'] = '107.175.92.50:27015',
+}
+
+local servers_2v2 = {
+    ['Solar | 2v2'] = '135.148.53.7:27030; password solar',
+    ['Profits | 2v2'] = '135.148.53.7:27018; password profits2v2',
+    ['Ace | 2v2'] = '135.148.53.7:27019; password ace2v2',
+    ['Arctic | 2v2'] = '135.148.53.7:27017; password arctic2v2',
+    ['OG | 2v2'] = 'og2v2.game.nfoservers.com; password OG2v2',
+    ['Profits | 5v5'] = '135.148.53.7:27016; password profits5v5',
+    ['Gamesense'] = '135.148.53.7:27031; password gamesense',
+    ['Gamesense #2'] = '135.148.53.7:27032; password gamesense',
+    ['Profits 2v2 | Central'] = 'profits2v2.game.nfoservers.com:27015; password profits2v2',
+    ['blackpeople2v2'] = 'csgo.blackpeople.wtf; password blackpeople2v2',
+}
+
 local ref = {
     screen_size = render.get_screen_size(),
 }
@@ -18,10 +46,6 @@ local menuItems = {
     -- KillSay
     killSay = menu.add_checkbox("killsay", "killsay", false),
     killSaySetting = menu.add_selection("killsay", "setting", {"boof.gg", "friendly", "anti-ruski","gay","among us"}),
-    -- Indics
-    
-    -- Server Picker
-    serverPicker = menu.add_selection("quick server", "server", {"chair", "heretic", "no hyper", "doc"}),
     -- Halo
     haloToggle = menu.add_checkbox("meme", "halo announcer", false),
     -- Logo Indicator
@@ -154,7 +178,7 @@ function draw_indicators()
         render.text(vars.flags_font, "doubletap", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 410), color_t(color[1], color[2], color[3], opacity), true)
         render.text(vars.flags_font, "hideshots", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 442), color_t(255, 255, 255, opacity2), true)
     end
-end 
+end
 
 -- KillSays
 function killChat(event_info)
@@ -246,32 +270,41 @@ local function haloSay(event_info)
     end
 end
 
--- -- Server Picker
--- local function joinChair()
---     engine.execute_cmd('connect 74.91.113.23:27015')
--- end
--- local function joinHeretic()
---     engine.execute_cmd('connect 74.91.125.35:27015')
--- end
--- local function joinNH()
---     engine.execute_cmd('connect 192.223.24.31:27015')
--- end
--- local function joinDoc()
---     engine.execute_cmd('connect 74.91.124.40:27015')
--- end
--- function confirmServer()
---     if (menuItems.serverPicker:get(1)) then
---         joinChair()
---     elseif (menuItems.serverPicker:get(2)) then
---         joinHeretic()
---     elseif (menuItems.serverPicker:get(3)) then
---         joinNH()
---     elseif (menuItems.serverPicker:get(4)) then
---         joinDoc()
---     else
---         joinChair()
---     end
--- end
+-- Server Picker
+for k, v in pairs(servers_community) do
+    table.insert(servercomm_names, k)
+end
+
+for k, v in pairs(servers_2v2) do
+    table.insert(server2v2_names, k)
+end
+
+local function connect(name, ip)
+    client.log_screen('Connecting to ' .. name .. ' [' .. ip .. '] ')
+    engine.execute_cmd('connect ' .. ip)
+end
+
+local function SetVisibility(table, condition)
+    for k, v in pairs(table) do
+        if (type(v) == 'table') then
+            for j, i in pairs(v) do
+                i:set_visible(condition)
+            end
+        else 
+            v:set_visible(condition)
+        end
+    end
+end
+
+callbacks.add(e_callbacks.PAINT, function()
+    local toggle = ref.master:get()
+    local selection = ref.items.selection:get()
+
+    SetVisibility(ref.items, toggle)
+    button:set_visible(toggle)
+
+    ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
+end)
 
 -- -- CTAG
 -- local hasCleared = false
