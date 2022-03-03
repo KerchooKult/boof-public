@@ -197,262 +197,262 @@ function on_draw_watermark()
     end
 end
 
--- -- Indicators
--- -- local hideShots = menu.find("aimbot","general","exploits","hideshots")
--- -- client.log(hideShots:set(false))
+-- Indicators
+-- local hideShots = menu.find("aimbot","general","exploits","hideshots")
+-- client.log(hideShots:set(false))
 
--- local function normalize(yaw) 
---     return math.fmod(yaw + 180, 360) - 180;
--- end
+local function normalize(yaw) 
+    return math.fmod(yaw + 180, 360) - 180;
+end
 
--- local function map_var( value, min, max )
---     return ( value - min ) / ( max - min )
--- end
+local function map_var( value, min, max )
+    return ( value - min ) / ( max - min )
+end
 
--- local function Client_can_fire(canFireText, canFireColor)
---     if engine.is_in_game() then
---         canFire = client.can_fire()
---         if(not canFire) then
---             vars.canFireText = "FIRE"
---             canFireColor = {255,0,0,255}
---         else
---             vars.canFireText =  "FIRE"
---             canFireColor = {0,255,0,255}
---         end
---         colorFR = canFireColor[1]
---         colorFG = canFireColor[2]
---         colorFB = canFireColor[3]
---         colorFA = canFireColor[4]
---     end
--- end
+local function Client_can_fire(canFireText, canFireColor)
+    if engine.is_in_game() then
+        canFire = client.can_fire()
+        if(not canFire) then
+            vars.canFireText = "FIRE"
+            canFireColor = {255,0,0,255}
+        else
+            vars.canFireText =  "FIRE"
+            canFireColor = {0,255,0,255}
+        end
+        colorFR = canFireColor[1]
+        colorFG = canFireColor[2]
+        colorFB = canFireColor[3]
+        colorFA = canFireColor[4]
+    end
+end
 
--- local function FLcolor(fakelag_amount)
---     chokedTicks = engine.get_choked_commands()
---     if(chokedTicks < 10) then
---         colorFL = {255, 0, 0}
---     elseif(chokedTicks < 8) then
---         colorFL = {255, 255, 0}
---     else
---         colorFL = {0, 255, 0}
---     end
+local function FLcolor(fakelag_amount)
+    chokedTicks = engine.get_choked_commands()
+    if(chokedTicks < 10) then
+        colorFL = {255, 0, 0}
+    elseif(chokedTicks < 8) then
+        colorFL = {255, 255, 0}
+    else
+        colorFL = {0, 255, 0}
+    end
 
---     colorR = colorFL[1]
---     colorG = colorFL[2]
---     colorB = colorFL[3]
--- end
+    colorR = colorFL[1]
+    colorG = colorFL[2]
+    colorB = colorFL[3]
+end
 
--- local function on_aimbot_hit(hit)
---     local hitboxShot = "none"
---     if(hit.aim_hitgroup == e_hitgroups.GENERIC) then
---         hitboxShot = "generic"
---     elseif(hit.aim_hitgroup == e_hitgroups.HEAD) then
---         hitboxShot = "head"
---     elseif(hit.aim_hitgroup == e_hitgroups.CHEST) then
---         hitboxShot = "chest"
---     elseif(hit.aim_hitgroup == e_hitgroups.STOMACH) then
---         hitboxShot = "stomach"
---     elseif(hit.aim_hitgroup == e_hitgroups.LEFT_ARM) then
---         hitboxShot = "left arm"
---     elseif(hit.aim_hitgroup == e_hitgroups.RIGHT_ARM) then
---         hitboxShot = "right arm"
---     elseif(hit.aim_hitgroup == e_hitgroups.LEFT_LEG) then
---         hitboxShot = "left leg"
---     elseif(hit.aim_hitgroup == e_hitgroups.RIGHT_LEG) then
---         hitboxShot = "right leg"
---     elseif(hit.aim_hitgroup == e_hitgroups.NECK) then
---         hitboxShot = "neck"
---     end
---     if(menu.chat_logs:get()) then
---         chatLib.print_player(0, ("{blue}[boof] {white}hit {blue}"..hit.player:get_name().."{white}'s {blue}"..hitboxShot.." {white}for {blue}"..hit.damage.." {white}[hc: {blue}"..hit.aim_hitchance.."{white}] [safe: {blue}"..tostring(hit.aim_safepoint).."{white}] [bt: {blue}"..hit.backtrack_ticks.."{white}]"))
---     end
--- end
+local function on_aimbot_hit(hit)
+    local hitboxShot = "none"
+    if(hit.aim_hitgroup == e_hitgroups.GENERIC) then
+        hitboxShot = "generic"
+    elseif(hit.aim_hitgroup == e_hitgroups.HEAD) then
+        hitboxShot = "head"
+    elseif(hit.aim_hitgroup == e_hitgroups.CHEST) then
+        hitboxShot = "chest"
+    elseif(hit.aim_hitgroup == e_hitgroups.STOMACH) then
+        hitboxShot = "stomach"
+    elseif(hit.aim_hitgroup == e_hitgroups.LEFT_ARM) then
+        hitboxShot = "left arm"
+    elseif(hit.aim_hitgroup == e_hitgroups.RIGHT_ARM) then
+        hitboxShot = "right arm"
+    elseif(hit.aim_hitgroup == e_hitgroups.LEFT_LEG) then
+        hitboxShot = "left leg"
+    elseif(hit.aim_hitgroup == e_hitgroups.RIGHT_LEG) then
+        hitboxShot = "right leg"
+    elseif(hit.aim_hitgroup == e_hitgroups.NECK) then
+        hitboxShot = "neck"
+    end
+    if(menu.chat_logs:get()) then
+        chatLib.print_player(0, ("{blue}[boof] {white}hit {blue}"..hit.player:get_name().."{white}'s {blue}"..hitboxShot.." {white}for {blue}"..hit.damage.." {white}[hc: {blue}"..hit.aim_hitchance.."{white}] [safe: {blue}"..tostring(hit.aim_safepoint).."{white}] [bt: {blue}"..hit.backtrack_ticks.."{white}]"))
+    end
+end
 
--- local function on_aimbot_miss(miss)
---     local hitboxShot = "none"
---     if(miss.aim_hitgroup == e_hitgroups.GENERIC) then
---         hitboxShot = "generic"
---     elseif(miss.aim_hitgroup == e_hitgroups.HEAD) then
---         hitboxShot = "head"
---     elseif(miss.aim_hitgroup == e_hitgroups.CHEST) then
---         hitboxShot = "chest"
---     elseif(miss.aim_hitgroup == e_hitgroups.STOMACH) then
---         hitboxShot = "stomach"
---     elseif(miss.aim_hitgroup == e_hitgroups.LEFT_ARM) then
---         hitboxShot = "left arm"
---     elseif(miss.aim_hitgroup == e_hitgroups.RIGHT_ARM) then
---         hitboxShot = "right arm"
---     elseif(miss.aim_hitgroup == e_hitgroups.LEFT_LEG) then
---         hitboxShot = "left leg"
---     elseif(miss.aim_hitgroup == e_hitgroups.RIGHT_LEG) then
---         hitboxShot = "right leg"
---     elseif(miss.aim_hitgroup == e_hitgroups.NECK) then
---         hitboxShot = "neck"
---     end
+local function on_aimbot_miss(miss)
+    local hitboxShot = "none"
+    if(miss.aim_hitgroup == e_hitgroups.GENERIC) then
+        hitboxShot = "generic"
+    elseif(miss.aim_hitgroup == e_hitgroups.HEAD) then
+        hitboxShot = "head"
+    elseif(miss.aim_hitgroup == e_hitgroups.CHEST) then
+        hitboxShot = "chest"
+    elseif(miss.aim_hitgroup == e_hitgroups.STOMACH) then
+        hitboxShot = "stomach"
+    elseif(miss.aim_hitgroup == e_hitgroups.LEFT_ARM) then
+        hitboxShot = "left arm"
+    elseif(miss.aim_hitgroup == e_hitgroups.RIGHT_ARM) then
+        hitboxShot = "right arm"
+    elseif(miss.aim_hitgroup == e_hitgroups.LEFT_LEG) then
+        hitboxShot = "left leg"
+    elseif(miss.aim_hitgroup == e_hitgroups.RIGHT_LEG) then
+        hitboxShot = "right leg"
+    elseif(miss.aim_hitgroup == e_hitgroups.NECK) then
+        hitboxShot = "neck"
+    end
 
---     if(menu.chat_logs:get()) then
---         chatLib.print_player(0, ("{blue}[boof] {white}missed {blue}"..miss.player:get_name().."{white}'s {blue}"..hitboxShot.." {white}for reason {blue}"..miss.reason_string.."{white} with {blue}"..miss.aim_damage.." {white}[hc: {blue}"..miss.aim_hitchance.."{white}] [safe: {blue}"..tostring(miss.aim_safepoint).."{white}] [bt: {blue}"..miss.backtrack_ticks.."{white}]"))
---     end
--- end
+    if(menu.chat_logs:get()) then
+        chatLib.print_player(0, ("{blue}[boof] {white}missed {blue}"..miss.player:get_name().."{white}'s {blue}"..hitboxShot.." {white}for reason {blue}"..miss.reason_string.."{white} with {blue}"..miss.aim_damage.." {white}[hc: {blue}"..miss.aim_hitchance.."{white}] [safe: {blue}"..tostring(miss.aim_safepoint).."{white}] [bt: {blue}"..miss.backtrack_ticks.."{white}]"))
+    end
+end
 
--- function draw_indicators()
---     if not ref.player or not engine.is_in_game() then return end
---         max_desync = math.abs( antiaim.get_max_desync_range( ) )
---         cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
---         cur_desync_real = math.floor(normalize(antiaim.get_fake_angle() - antiaim.get_real_angle()))
---         if(menu.desyncIndicator:get()) then
---             -- boof logo
---             local text_size = render.get_text_size(vars.indicator_font, "boof")
---             clipSize = map_var( max_desync, 0, 58 ) * text_size.x
---             velo = math.floor(ref.player:get_prop('m_vecVelocity'):length2d())
---             chokedTicks = engine.get_choked_commands()
---             ping = math.floor(engine.get_latency(e_latency_flows.OUTGOING) * 800)
---             fps = client.get_fps()
---             hp = ref.player:get_prop("m_iHealth")
---             armor = ref.player:get_prop("m_ArmorValue")
+function draw_indicators()
+    if not ref.player or not engine.is_in_game() then return end
+        max_desync = math.abs( antiaim.get_max_desync_range( ) )
+        cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
+        cur_desync_real = math.floor(normalize(antiaim.get_fake_angle() - antiaim.get_real_angle()))
+        if(menu.desyncIndicator:get()) then
+            -- boof logo
+            local text_size = render.get_text_size(vars.indicator_font, "boof")
+            clipSize = map_var( max_desync, 0, 58 ) * text_size.x
+            velo = math.floor(ref.player:get_prop('m_vecVelocity'):length2d())
+            chokedTicks = engine.get_choked_commands()
+            ping = math.floor(engine.get_latency(e_latency_flows.OUTGOING) * 800)
+            fps = client.get_fps()
+            hp = ref.player:get_prop("m_iHealth")
+            armor = ref.player:get_prop("m_ArmorValue")
             
---             local text_size = render.get_text_size(vars.fonts.font_ptr[menu.font_select:get()], "FAKE")
---             local text_size_boof = render.get_text_size(vars.fonts.font_ptr[menu.font_select:get()], "boof")
+            local text_size = render.get_text_size(vars.fonts.font_ptr[menu.font_select:get()], "FAKE")
+            local text_size_boof = render.get_text_size(vars.fonts.font_ptr[menu.font_select:get()], "boof")
           
---             max_desync = math.abs( antiaim.get_max_desync_range( ) )
---             cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
---             cur_desync_real = math.floor(  normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle())) 
---             size = map_var( max_desync, 0, 58 ) * text_size.x
---             sizeDesync = map_var( max_desync, -58, 58 ) * text_size.x
---             ---fake indicator math
+            max_desync = math.abs( antiaim.get_max_desync_range( ) )
+            cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
+            cur_desync_real = math.floor(  normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle())) 
+            size = map_var( max_desync, 0, 58 ) * text_size.x
+            sizeDesync = map_var( max_desync, -58, 58 ) * text_size.x
+            ---fake indicator math
         
---             ---cahrge indicator math
---             cur_charge = exploits.get_charge()
---             max_charge = exploits.get_max_charge()
---             sizeCharge = map_var(max_charge, 0, cur_charge) * text_size.x
+            ---cahrge indicator math
+            cur_charge = exploits.get_charge()
+            max_charge = exploits.get_max_charge()
+            sizeCharge = map_var(max_charge, 0, cur_charge) * text_size.x
         
---             -----charge
+            -----charge
         
---             -----fake lag math
---             sizeFL = map_var(ref.fakelag_amount:get(), 0, chokedTicks) * text_size.x
---             ----fake lag
+            -----fake lag math
+            sizeFL = map_var(ref.fakelag_amount:get(), 0, chokedTicks) * text_size.x
+            ----fake lag
         
---             ------net var
---             local frame_time = ffi.new("float[1]")
---             local frame_std_deviation = ffi.new("float[1]")
---             local frame_start_deviation = ffi.new("float[1]")
---             local server_var = 0
---             if(get_net_channel_info == nil or net_channel_info == nil or get_remote_frame == nil) then return end
---             get_remote_frame(net_channel_info,frame_time,frame_std_deviation,frame_start_deviation)
---             if frame_time ~= nil and frame_std_deviation ~= nil and frame_std_deviation ~= nil then
---                 server_var = frame_start_deviation[0] * 1000
---             end
---             local var_rounded = tonumber(string.format("%." .. (1 or 0) .. "f", server_var))
---             -------net var
+            ------net var
+            local frame_time = ffi.new("float[1]")
+            local frame_std_deviation = ffi.new("float[1]")
+            local frame_start_deviation = ffi.new("float[1]")
+            local server_var = 0
+            if(get_net_channel_info == nil or net_channel_info == nil or get_remote_frame == nil) then return end
+            get_remote_frame(net_channel_info,frame_time,frame_std_deviation,frame_start_deviation)
+            if frame_time ~= nil and frame_std_deviation ~= nil and frame_std_deviation ~= nil then
+                server_var = frame_start_deviation[0] * 1000
+            end
+            local var_rounded = tonumber(string.format("%." .. (1 or 0) .. "f", server_var))
+            -------net var
             
         
---             indicator_size = vec2_t(ref.screen_size.x * 0.2, 6 )
---             indicator_pos = vec2_t((ref.screen_size.x * 0.5 ) - indicator_size.x * 0.5, ref.screen_size.y - 30 )
---             FLcolor(chokedTicks)
---             Client_can_fire(canFire)
+            indicator_size = vec2_t(ref.screen_size.x * 0.2, 6 )
+            indicator_pos = vec2_t((ref.screen_size.x * 0.5 ) - indicator_size.x * 0.5, ref.screen_size.y - 30 )
+            FLcolor(chokedTicks)
+            Client_can_fire(canFire)
         
         
---             if engine.is_connected()  then
---                 if ref.player ~= nil then
---                     if(menu.fake_lag_circle:get()) then    
---                         render.circle_filled(vec2_t.new(145, 690), 10, color_t.new(25,25,25,155))
---                         if(chokedTicks > 0) then    
---                             render.progress_circle(vec2_t.new(145, 690), 9, color_t.new(colorR,colorG,colorB), 4, chokedTicks/15)
---                         end
---                     end
+            if engine.is_connected()  then
+                if ref.player ~= nil then
+                    if(menu.fake_lag_circle:get()) then    
+                        render.circle_filled(vec2_t.new(145, 690), 10, color_t.new(25,25,25,155))
+                        if(chokedTicks > 0) then    
+                            render.progress_circle(vec2_t.new(145, 690), 9, color_t.new(colorR,colorG,colorB), 4, chokedTicks/15)
+                        end
+                    end
         
---                     if(menu.net_graph:get()) then
---                         render.rect_fade(vec2_t(ref.x-240, ref.y+455), vec2_t(250, 30), color_t(0, 0, 0, 0), color_t(0, 0, 0, 200), true)
---                         render.rect_fade(vec2_t(ref.x+10, ref.y+455), vec2_t(250, 30), color_t(0, 0, 0, 200), color_t(0, 0, 0, 0), true)
+                    if(menu.net_graph:get()) then
+                        render.rect_fade(vec2_t(ref.x-240, ref.y+455), vec2_t(250, 30), color_t(0, 0, 0, 0), color_t(0, 0, 0, 200), true)
+                        render.rect_fade(vec2_t(ref.x+10, ref.y+455), vec2_t(250, 30), color_t(0, 0, 0, 200), color_t(0, 0, 0, 0), true)
                         
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], string.format("%i fps    %i m/s     %i ping      %i var", fps, velo, ping, var_rounded), vec2_t(ref.x, ref.y+470),(vars.color:get()), true)
---                     end
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], string.format("%i fps    %i m/s     %i ping      %i var", fps, velo, ping, var_rounded), vec2_t(ref.x, ref.y+470),(vars.color:get()), true)
+                    end
                     
                     
---                     if(menu.health_armorToggle:get()) then
---                         --the bar being filled
---                         fillHP = map_var(hp, 0, 100 ) * indicator_size.x
---                         fillArmor = map_var(armor, 0, 100 ) * indicator_size.x
+                    if(menu.health_armorToggle:get()) then
+                        --the bar being filled
+                        fillHP = map_var(hp, 0, 100 ) * indicator_size.x
+                        fillArmor = map_var(armor, 0, 100 ) * indicator_size.x
                         
---                         -- render the indicator
---                         render.rect_filled(vec2_t(indicator_pos.x - 20, indicator_pos.y), vec2_t(indicator_size.x /2, indicator_size.y), color_t( 45, 45, 45, 155), 3)
---                         render.rect_filled(vec2_t(indicator_pos.x + 190, indicator_pos.y), vec2_t(indicator_size.x /2, indicator_size.y), color_t( 45, 45, 45, 155), 3)
---                         -- fill
---                         render.rect_filled(vec2_t(indicator_pos.x - 20, indicator_pos.y), vec2_t(fillHP/2, indicator_size.y),  color_t(0, 255, 0, 255), 3)
---                         render.rect_filled(vec2_t(indicator_pos.x + 190, indicator_pos.y), vec2_t(fillArmor/2, indicator_size.y),  color_t(0, 0, 230, 255), 3)
---                         -- outline
---                         render.rect(vec2_t(indicator_pos.x - 21, indicator_pos.y - 1), vec2_t(indicator_size.x/2 + 1, indicator_size.y + 1), color_t(15, 15, 15), 3)
---                         render.rect(vec2_t(indicator_pos.x + 189, indicator_pos.y - 1), vec2_t(indicator_size.x/2 + 1, indicator_size.y + 1), color_t(15, 15, 15), 3)
---                         --text
---                         render.text(vars.main_font, "health", vec2_t(indicator_pos.x + 45, indicator_pos.y - 25), color_t(0,255,0,155))
---                     end
+                        -- render the indicator
+                        render.rect_filled(vec2_t(indicator_pos.x - 20, indicator_pos.y), vec2_t(indicator_size.x /2, indicator_size.y), color_t( 45, 45, 45, 155), 3)
+                        render.rect_filled(vec2_t(indicator_pos.x + 190, indicator_pos.y), vec2_t(indicator_size.x /2, indicator_size.y), color_t( 45, 45, 45, 155), 3)
+                        -- fill
+                        render.rect_filled(vec2_t(indicator_pos.x - 20, indicator_pos.y), vec2_t(fillHP/2, indicator_size.y),  color_t(0, 255, 0, 255), 3)
+                        render.rect_filled(vec2_t(indicator_pos.x + 190, indicator_pos.y), vec2_t(fillArmor/2, indicator_size.y),  color_t(0, 0, 230, 255), 3)
+                        -- outline
+                        render.rect(vec2_t(indicator_pos.x - 21, indicator_pos.y - 1), vec2_t(indicator_size.x/2 + 1, indicator_size.y + 1), color_t(15, 15, 15), 3)
+                        render.rect(vec2_t(indicator_pos.x + 189, indicator_pos.y - 1), vec2_t(indicator_size.x/2 + 1, indicator_size.y + 1), color_t(15, 15, 15), 3)
+                        --text
+                        render.text(vars.main_font, "health", vec2_t(indicator_pos.x + 45, indicator_pos.y - 25), color_t(0,255,0,155))
+                    end
         
---                     if(menu.fire_indicator:get()) then
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], tostring(vars.canFireText), vec2_t(20, 600), color_t(colorFR,colorFG,colorFB,colorFA))
---                     end
+                    if(menu.fire_indicator:get()) then
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], tostring(vars.canFireText), vec2_t(20, 600), color_t(colorFR,colorFG,colorFB,colorFA))
+                    end
         
---                     if(menu.fake_indicator:get()) then
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKE", vec2_t(20, 625), color_t(255, 0, 0))
---                         render.push_clip(vec2_t(20, 625), vec2_t(size, text_size.y))
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKE", vec2_t(20, 625), color_t(0, 255, 0))
---                         render.pop_clip()
+                    if(menu.fake_indicator:get()) then
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKE", vec2_t(20, 625), color_t(255, 0, 0))
+                        render.push_clip(vec2_t(20, 625), vec2_t(size, text_size.y))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKE", vec2_t(20, 625), color_t(0, 255, 0))
+                        render.pop_clip()
         
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], tostring(cur_desync_real), vec2_t(ref.x, ref.y-100), color_t(255,255,255,155))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], tostring(cur_desync_real), vec2_t(ref.x, ref.y-100), color_t(255,255,255,155))
         
         
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "boof", vec2_t(ref.x, ref.y-140), color_t(255,255,255,255))
---                         --render.push_clip(vec2_t(ref.x+40, ref.y), vec2_t(sizeDesync, text_size_boof.y))
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "boof", vec2_t(ref.x, ref.y-140), color_t(33,132,255,155))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "boof", vec2_t(ref.x, ref.y-140), color_t(255,255,255,255))
+                        --render.push_clip(vec2_t(ref.x+40, ref.y), vec2_t(sizeDesync, text_size_boof.y))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "boof", vec2_t(ref.x, ref.y-140), color_t(33,132,255,155))
                         
---                         render.pop_clip()
+                        render.pop_clip()
         
---                     end
---                     if(menu.charge_indicator:get()) then
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "CHARGE", vec2_t(20, 650), color_t(255, 0, 0))
---                         render.push_clip(vec2_t(20, 650), vec2_t(sizeCharge, text_size.y))
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "CHARGE", vec2_t(20, 650), color_t(0, 255, 0))
---                         render.pop_clip()
---                     end
---                      if(menu.fL_indicator:get()) then
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKELAG", vec2_t(20, 675), color_t(colorR, colorG, colorB))
---                         render.push_clip(vec2_t(20, 625), vec2_t(sizeFL, text_size.y))
---                         render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKELAG", vec2_t(20, 675), color_t(colorR, colorG, colorB))
---                         render.pop_clip()
---                      end
+                    end
+                    if(menu.charge_indicator:get()) then
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "CHARGE", vec2_t(20, 650), color_t(255, 0, 0))
+                        render.push_clip(vec2_t(20, 650), vec2_t(sizeCharge, text_size.y))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "CHARGE", vec2_t(20, 650), color_t(0, 255, 0))
+                        render.pop_clip()
+                    end
+                     if(menu.fL_indicator:get()) then
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKELAG", vec2_t(20, 675), color_t(colorR, colorG, colorB))
+                        render.push_clip(vec2_t(20, 625), vec2_t(sizeFL, text_size.y))
+                        render.text(vars.fonts.font_ptr[menu.font_select:get()], "FAKELAG", vec2_t(20, 675), color_t(colorR, colorG, colorB))
+                        render.pop_clip()
+                     end
                     
---                 end
---             end
+                end
+            end
 
 
 
---             render.text(vars.indicator_font, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(255, 255, 255, 255), true)
---             render.push_clip(vec2_t(ref.screen_size.x / 2 + 5, ref.screen_size.y / 2 + 280), vec2_t(clipSize, text_size.y))
---             render.text(vars.indicator_font2, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(33, 122, 255, 255), true)
---             render.pop_clip()
+            render.text(vars.indicator_font, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(255, 255, 255, 255), true)
+            render.push_clip(vec2_t(ref.screen_size.x / 2 + 5, ref.screen_size.y / 2 + 280), vec2_t(clipSize, text_size.y))
+            render.text(vars.indicator_font2, "boof", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 300), color_t(33, 122, 255, 255), true)
+            render.pop_clip()
 
---             render.rect_filled(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(200,200,200))
---             render.rect(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(0,0,0))
---             render.text(vars.degrees_font, tostring(math.floor(cur_desync_real)) .. "°" or "0°", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 380), color_t(33, 122, 255, 255), true)
---             local opacity = 50
---             local color = {
---                 255,255,255
---             }
---             if(exploits.get_charge() ~= 0 and exploits.get_charge() ~= 14) then
---                 opacity = 100
---             elseif(exploits.get_charge() == 14) then
---                 opacity = 200
---                 color = {
---                     33,122,255
---                 }
---             end
---             local opacity2 = 50
+            render.rect_filled(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(200,200,200))
+            render.rect(vec2_t(ref.screen_size.x / 2 - 95, ref.screen_size.y / 2 + 335), vec2_t(200, 13), color_t(0,0,0))
+            render.text(vars.degrees_font, tostring(math.floor(cur_desync_real)) .. "°" or "0°", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 380), color_t(33, 122, 255, 255), true)
+            local opacity = 50
+            local color = {
+                255,255,255
+            }
+            if(exploits.get_charge() ~= 0 and exploits.get_charge() ~= 14) then
+                opacity = 100
+            elseif(exploits.get_charge() == 14) then
+                opacity = 200
+                color = {
+                    33,122,255
+                }
+            end
+            local opacity2 = 50
 
---             if(hideShots) then
---                 opacity2 = 200
---             end
---             render.text(vars.flags_font, "doubletap", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 410), color_t(color[1], color[2], color[3], opacity), true)
---             render.text(vars.flags_font, "hideshots", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 442), color_t(255, 255, 255, opacity2), true)
---         end
--- end 
+            if(hideShots) then
+                opacity2 = 200
+            end
+            render.text(vars.flags_font, "doubletap", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 410), color_t(color[1], color[2], color[3], opacity), true)
+            render.text(vars.flags_font, "hideshots", vec2_t(ref.screen_size.x / 2, ref.screen_size.y / 2 + 442), color_t(255, 255, 255, opacity2), true)
+        end
+end 
 
 -- KillSays
 function killChat(event_info)
@@ -695,8 +695,8 @@ end
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
--- callbacks.add(e_callbacks.PAINT, on_paint)
--- callbacks.add(e_callbacks.PAINT, draw_indicators)
+callbacks.add(e_callbacks.PAINT, on_paint)
+callbacks.add(e_callbacks.PAINT, draw_indicators)
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
 -- callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
 -- callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
