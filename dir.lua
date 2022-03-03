@@ -60,7 +60,7 @@
         -- Watermark
         watermark_toggle = menu.add_checkbox("boof content", "watermark", false),
         watermarkToxic = menu.add_checkbox("boof content", "toxic mode", false),
-        watermarkSelector = menu.add_multi_selection("boof watermark", "watermark options", {"name", "fps", "tick", "kills", "ping"}),
+        watermarkSelector = menu.add_multi_selection("boof content", "watermark options", {"name", "fps", "tick", "kills", "ping"}),
         -- Clantag
         clantag_toggle = menu.add_checkbox("boof content", "clantag", false),
         -- KillSay
@@ -436,7 +436,7 @@
     callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
     callbacks.add(e_callbacks.EVENT,killChat,"player_death")
     callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
-    -- callbacks.add(e_callbacks.PAINT, on_paint)
+    callbacks.add(e_callbacks.PAINT, on_paint)
     -- callbacks.add(e_callbacks.PAINT, draw_indicators)
     callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
     -- menu.add_button("quick server", "confirm", confirmServer)
