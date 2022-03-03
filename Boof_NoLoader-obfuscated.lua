@@ -159,95 +159,95 @@ end
 --     end
 -- end 
 
--- -- KillSays
--- function killChat(event_info)
---     if(menuItems.killSay:get()) then
---         local attacker = entity_list.get_player_from_userid(event_info.attacker)
---         local victim = entity_list.get_player_from_userid(event_info.userid)
---         if attacker == nil then return end
---         if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
---             return
---         end
---         if(attacker:get_name() == victim:get_name()) then return end
---         local dumbassname = victim:get_name()
---         local s = "my killsay is ass lmao"
+-- KillSays
+function killChat(event_info)
+    if(menuItems.killSay:get()) then
+        local attacker = entity_list.get_player_from_userid(event_info.attacker)
+        local victim = entity_list.get_player_from_userid(event_info.userid)
+        if attacker == nil then return end
+        if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
+            return
+        end
+        if(attacker:get_name() == victim:get_name()) then return end
+        local dumbassname = victim:get_name()
+        local s = "my killsay is ass lmao"
 
---         if (menuItems.killSaySetting:get() == 1) then
---             s = vars.boofMode[client.random_int(1, #vars.boofMode)]
---         elseif (menuItems.killSaySetting:get() == 2) then
---             s = vars.friendlyMode[client.random_int(1, #vars.friendlyMode)]
---         elseif(menuItems.killSaySetting:get() == 3) then
---             s = vars.russianMode[client.random_int(1, #vars.russianMode)]
---         elseif(menuItems.killSaySetting:get() == 4) then
---             s = vars.gayMode[client.random_int(1, #vars.gayMode)]
---         elseif(menuItems.killSaySetting:get() == 5) then
---             s = vars.amongUsMode[client.random_int(1, #vars.amongUsMode)]
---         else                
---             s = vars.boofMode[client.random_int(1, #vars.boofMode)]
---         end
+        if (menuItems.killSaySetting:get() == 1) then
+            s = vars.boofMode[client.random_int(1, #vars.boofMode)]
+        elseif (menuItems.killSaySetting:get() == 2) then
+            s = vars.friendlyMode[client.random_int(1, #vars.friendlyMode)]
+        elseif(menuItems.killSaySetting:get() == 3) then
+            s = vars.russianMode[client.random_int(1, #vars.russianMode)]
+        elseif(menuItems.killSaySetting:get() == 4) then
+            s = vars.gayMode[client.random_int(1, #vars.gayMode)]
+        elseif(menuItems.killSaySetting:get() == 5) then
+            s = vars.amongUsMode[client.random_int(1, #vars.amongUsMode)]
+        else                
+            s = vars.boofMode[client.random_int(1, #vars.boofMode)]
+        end
 
---         s = string.gsub(s, "hh", dumbassname)
---         client.log(s)
---         engine.execute_cmd("say " .. s)
---     end
---     vars.killCount = vars.killCount + 1
--- end
+        s = string.gsub(s, "hh", dumbassname)
+        client.log(s)
+        engine.execute_cmd("say " .. s)
+    end
+    vars.killCount = vars.killCount + 1
+end
 
--- -- Halo
--- local killNumber = 0
--- local hasKilledRecently = false
--- function reduceKill()
---     if(hasKilledRecently ~= true) then
---         killNumber = 0
---     end
--- end
--- function hasntKilled()
---     hasKilledRecently = false
--- end
--- function endRound()
---     client.log('reset kill count')
---     hasKilledRecently = false
---     killNumber = 0
--- end
--- local function haloSay(event_info)
---     if(menuItems.haloToggle:get()) then
---         local attacker = entity_list.get_player_from_userid(event_info.attacker)
---         local victim = entity_list.get_player_from_userid(event_info.userid)
---         if attacker == nil then 
---             return 
---         end
---         -- make local deaths not count
---         if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
---             return
---         end
+-- Halo
+local killNumber = 0
+local hasKilledRecently = false
+function reduceKill()
+    if(hasKilledRecently ~= true) then
+        killNumber = 0
+    end
+end
+function hasntKilled()
+    hasKilledRecently = false
+end
+function endRound()
+    client.log('reset kill count')
+    hasKilledRecently = false
+    killNumber = 0
+end
+local function haloSay(event_info)
+    if(menuItems.haloToggle:get()) then
+        local attacker = entity_list.get_player_from_userid(event_info.attacker)
+        local victim = entity_list.get_player_from_userid(event_info.userid)
+        if attacker == nil then 
+            return 
+        end
+        -- make local deaths not count
+        if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
+            return
+        end
 
---         killNumber = killNumber + 1
---         hasKilledRecently = true
---         client.delay_call(hasntKilled, 5.0)
---         client.delay_call(reduceKill, 7.0)
+        killNumber = killNumber + 1
+        hasKilledRecently = true
+        client.delay_call(hasntKilled, 5.0)
+        client.delay_call(reduceKill, 7.0)
 
---         if(killNumber == 2) then
---             engine.play_sound("2k.wav", 40, 100) -- change the 100 to up/lower the pitch of classys voice :)
---         end
+        if(killNumber == 2) then
+            engine.play_sound("2k.wav", 40, 100) -- change the 100 to up/lower the pitch of classys voice :)
+        end
 
---         if(killNumber == 3) then
---             engine.play_sound("3k.wav", 40, 100)
---         end
+        if(killNumber == 3) then
+            engine.play_sound("3k.wav", 40, 100)
+        end
 
---         if(killNumber == 4) then
---             engine.play_sound("4k.wav", 40, 100)
---         end
+        if(killNumber == 4) then
+            engine.play_sound("4k.wav", 40, 100)
+        end
 
---         if(killNumber == 5) then
---             engine.play_sound("5k.wav", 40, 100)
---         end
+        if(killNumber == 5) then
+            engine.play_sound("5k.wav", 40, 100)
+        end
 
---         if(killNumber == 5) then
---             engine.play_sound("6k.wav", 40, 100)
---             killNumber = 0
---         end
---     end
--- end
+        if(killNumber == 5) then
+            engine.play_sound("6k.wav", 40, 100)
+            killNumber = 0
+        end
+    end
+end
 
 -- -- Server Picker
 -- local function joinChair()
@@ -383,8 +383,8 @@ end
 -- end
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
--- callbacks.add(e_callbacks.EVENT,killChat,"player_death")
--- callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
+callbacks.add(e_callbacks.EVENT,killChat,"player_death")
+callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 -- callbacks.add(e_callbacks.PAINT, on_paint)
 -- callbacks.add(e_callbacks.PAINT, draw_indicators)
 -- callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
