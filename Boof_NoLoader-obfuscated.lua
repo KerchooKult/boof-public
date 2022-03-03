@@ -454,95 +454,95 @@ end
 --         end
 -- end 
 
--- -- KillSays
--- function killChat(event_info)
---     if(menu.killSay:get()) then
---         local attacker = entity_list.get_player_from_userid(event_info.attacker)
---         local victim = entity_list.get_player_from_userid(event_info.userid)
---         if attacker == nil then return end
---         if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
---             return
---         end
---         if(attacker:get_name() == victim:get_name()) then return end
---         local dumbassname = victim:get_name()
---         local s = "my killsay is ass lmao"
+-- KillSays
+function killChat(event_info)
+    if(menu.killSay:get()) then
+        local attacker = entity_list.get_player_from_userid(event_info.attacker)
+        local victim = entity_list.get_player_from_userid(event_info.userid)
+        if attacker == nil then return end
+        if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
+            return
+        end
+        if(attacker:get_name() == victim:get_name()) then return end
+        local dumbassname = victim:get_name()
+        local s = "my killsay is ass lmao"
 
---         if (menu.killSaySetting:get() == 1) then
---             s = vars.boofMode[client.random_int(1, #vars.boofMode)]
---         elseif (menu.killSaySetting:get() == 2) then
---             s = vars.friendlyMode[client.random_int(1, #vars.friendlyMode)]
---         elseif(menu.killSaySetting:get() == 3) then
---             s = vars.russianMode[client.random_int(1, #vars.russianMode)]
---         elseif(menu.killSaySetting:get() == 4) then
---             s = vars.gayMode[client.random_int(1, #vars.gayMode)]
---         elseif(menu.killSaySetting:get() == 5) then
---             s = vars.amongUsMode[client.random_int(1, #vars.amongUsMode)]
---         else                
---             s = vars.boofMode[client.random_int(1, #vars.boofMode)]
---         end
+        if (menu.killSaySetting:get() == 1) then
+            s = vars.boofMode[client.random_int(1, #vars.boofMode)]
+        elseif (menu.killSaySetting:get() == 2) then
+            s = vars.friendlyMode[client.random_int(1, #vars.friendlyMode)]
+        elseif(menu.killSaySetting:get() == 3) then
+            s = vars.russianMode[client.random_int(1, #vars.russianMode)]
+        elseif(menu.killSaySetting:get() == 4) then
+            s = vars.gayMode[client.random_int(1, #vars.gayMode)]
+        elseif(menu.killSaySetting:get() == 5) then
+            s = vars.amongUsMode[client.random_int(1, #vars.amongUsMode)]
+        else                
+            s = vars.boofMode[client.random_int(1, #vars.boofMode)]
+        end
 
---         s = string.gsub(s, "hh", dumbassname)
---         client.log(s)
---         engine.execute_cmd("say " .. s)
---     end
---     vars.killCount = vars.killCount + 1
--- end
+        s = string.gsub(s, "hh", dumbassname)
+        client.log(s)
+        engine.execute_cmd("say " .. s)
+    end
+    vars.killCount = vars.killCount + 1
+end
 
--- -- Halo
--- local killNumber = 0
--- local hasKilledRecently = false
--- function reduceKill()
---     if(hasKilledRecently ~= true) then
---         killNumber = 0
---     end
--- end
--- function hasntKilled()
---     hasKilledRecently = false
--- end
--- function endRound()
---     client.log('reset kill count')
---     hasKilledRecently = false
---     killNumber = 0
--- end
--- local function haloSay(event_info)
---     if(menu.haloToggle:get()) then
---         local attacker = entity_list.get_player_from_userid(event_info.attacker)
---         local victim = entity_list.get_player_from_userid(event_info.userid)
---         if attacker == nil then 
---             return 
---         end
---         -- make local deaths not count
---         if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
---             return
---         end
+-- Halo
+local killNumber = 0
+local hasKilledRecently = false
+function reduceKill()
+    if(hasKilledRecently ~= true) then
+        killNumber = 0
+    end
+end
+function hasntKilled()
+    hasKilledRecently = false
+end
+function endRound()
+    client.log('reset kill count')
+    hasKilledRecently = false
+    killNumber = 0
+end
+local function haloSay(event_info)
+    if(menu.haloToggle:get()) then
+        local attacker = entity_list.get_player_from_userid(event_info.attacker)
+        local victim = entity_list.get_player_from_userid(event_info.userid)
+        if attacker == nil then 
+            return 
+        end
+        -- make local deaths not count
+        if(attacker:get_name() ~= entity_list.get_local_player():get_name()) then
+            return
+        end
 
---         killNumber = killNumber + 1
---         hasKilledRecently = true
---         client.delay_call(hasntKilled, 5.0)
---         client.delay_call(reduceKill, 7.0)
+        killNumber = killNumber + 1
+        hasKilledRecently = true
+        client.delay_call(hasntKilled, 5.0)
+        client.delay_call(reduceKill, 7.0)
 
---         if(killNumber == 2) then
---             engine.play_sound("2k.wav", 40, 100) -- change the 100 to up/lower the pitch of classys voice :)
---         end
+        if(killNumber == 2) then
+            engine.play_sound("2k.wav", 40, 100) -- change the 100 to up/lower the pitch of classys voice :)
+        end
 
---         if(killNumber == 3) then
---             engine.play_sound("3k.wav", 40, 100)
---         end
+        if(killNumber == 3) then
+            engine.play_sound("3k.wav", 40, 100)
+        end
 
---         if(killNumber == 4) then
---             engine.play_sound("4k.wav", 40, 100)
---         end
+        if(killNumber == 4) then
+            engine.play_sound("4k.wav", 40, 100)
+        end
 
---         if(killNumber == 5) then
---             engine.play_sound("5k.wav", 40, 100)
---         end
+        if(killNumber == 5) then
+            engine.play_sound("5k.wav", 40, 100)
+        end
 
---         if(killNumber == 5) then
---             engine.play_sound("6k.wav", 40, 100)
---             killNumber = 0
---         end
---     end
--- end
+        if(killNumber == 5) then
+            engine.play_sound("6k.wav", 40, 100)
+            killNumber = 0
+        end
+    end
+end
 
 -- -- Server Picker
 -- for k, v in pairs(servers_community) do
@@ -580,111 +580,111 @@ end
 --     ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
 -- end)
 
--- -- CTAG
--- local hasCleared = false
--- local replacingZero = false
--- local lastChar = false
--- local send_clan_tag_addr = memory.find_pattern( "engine.dll", "53 56 57 8B DA 8B F9 FF 15" )
--- local send_clan_tag = ffi.cast( "void( __fastcall* )( const char*, const char* )", send_clan_tag_addr )
--- local clan_tag = "boof.gg ♥"
--- local clan_tag_delay = 66
--- clan_stored_index = -1
--- clan_index = 0
--- cur_tag = ""
--- prev_tag = ""
--- stored_clan_tag = ""
--- clantagTable = {}
--- function get_clantagTable_length(clantagTable)
---     local length = 0
+-- CTAG
+local hasCleared = false
+local replacingZero = false
+local lastChar = false
+local send_clan_tag_addr = memory.find_pattern( "engine.dll", "53 56 57 8B DA 8B F9 FF 15" )
+local send_clan_tag = ffi.cast( "void( __fastcall* )( const char*, const char* )", send_clan_tag_addr )
+local clan_tag = "boof.gg ♥"
+local clan_tag_delay = 66
+clan_stored_index = -1
+clan_index = 0
+cur_tag = ""
+prev_tag = ""
+stored_clan_tag = ""
+clantagTable = {}
+function get_clantagTable_length(clantagTable)
+    local length = 0
 
---     for i in pairs(clantagTable) do 
---         length = length + 1 
---     end
+    for i in pairs(clantagTable) do 
+        length = length + 1 
+    end
 
---     return length
--- end
+    return length
+end
 
--- function split_str_into_chars(str)
---     local clantagTable = {}
+function split_str_into_chars(str)
+    local clantagTable = {}
 
---     for i = 1, #str do
---         clantagTable[ i ] = str:sub(i, i) 
---     end
+    for i = 1, #str do
+        clantagTable[ i ] = str:sub(i, i) 
+    end
 
---     return clantagTable
--- end
--- function on_paint(  )
---     local local_plyr = entity_list.get_local_player( )
+    return clantagTable
+end
+function on_paint(  )
+    local local_plyr = entity_list.get_local_player( )
 
---     if not local_plyr then
---         vars.stored_cur_time2 = -1
---         return
---     end
+    if not local_plyr then
+        vars.stored_cur_time2 = -1
+        return
+    end
 
---     -- we changed, reset
---     if stored_clan_tag ~= clan_tag and clan_tag ~= "" then
---         clan_index = 0
---         cur_tag = ""
---         clantagTable = split_str_into_chars( clan_tag )
---         stored_clan_tag = clan_tag
---     end
+    -- we changed, reset
+    if stored_clan_tag ~= clan_tag and clan_tag ~= "" then
+        clan_index = 0
+        cur_tag = ""
+        clantagTable = split_str_into_chars( clan_tag )
+        stored_clan_tag = clan_tag
+    end
 
---     -- update
---     if global_vars.cur_time( ) - vars.stored_cur_time2 > clan_tag_delay * 0.01 then
---         clan_index = clan_index + 1
---         vars.stored_cur_time2 = global_vars.cur_time( )
---     end
+    -- update
+    if global_vars.cur_time( ) - vars.stored_cur_time2 > clan_tag_delay * 0.01 then
+        clan_index = clan_index + 1
+        vars.stored_cur_time2 = global_vars.cur_time( )
+    end
 
---     -- we're at the end, start over
---     if clan_index > get_clantagTable_length( clantagTable ) then
---         lastChar = false
---         cur_tag = ""
---         clan_index = 0
---     end
+    -- we're at the end, start over
+    if clan_index > get_clantagTable_length( clantagTable ) then
+        lastChar = false
+        cur_tag = ""
+        clan_index = 0
+    end
     
---     -- add the next char to our str
---     if clan_stored_index ~= clan_index then
---         if(clan_index == 2 or clan_index == 3) then
---             if(replacingZero) then
---                 cur_tag = cur_tag:sub(0, -2) .. ( clantagTable[ clan_index ] or "" )
---                 replacingZero = false
---                 clan_stored_index = clan_index
---             else
---                 cur_tag = cur_tag .. '0'
---                 clan_index = clan_index - 1
---                 replacingZero = true
---             end
---         elseif(clan_index == 9) then
---             if(lastChar) then
---                 cur_tag = cur_tag .. ( clantagTable[ clan_index ] or "" )
---                 clan_stored_index = clan_index
---             else
---                 lastChar = true
---                 clan_index = clan_index - 1
---             end
---         else
---             cur_tag = cur_tag .. ( clantagTable[ clan_index ] or "" )
---             clan_stored_index = clan_index
---         end
---     end
+    -- add the next char to our str
+    if clan_stored_index ~= clan_index then
+        if(clan_index == 2 or clan_index == 3) then
+            if(replacingZero) then
+                cur_tag = cur_tag:sub(0, -2) .. ( clantagTable[ clan_index ] or "" )
+                replacingZero = false
+                clan_stored_index = clan_index
+            else
+                cur_tag = cur_tag .. '0'
+                clan_index = clan_index - 1
+                replacingZero = true
+            end
+        elseif(clan_index == 9) then
+            if(lastChar) then
+                cur_tag = cur_tag .. ( clantagTable[ clan_index ] or "" )
+                clan_stored_index = clan_index
+            else
+                lastChar = true
+                clan_index = clan_index - 1
+            end
+        else
+            cur_tag = cur_tag .. ( clantagTable[ clan_index ] or "" )
+            clan_stored_index = clan_index
+        end
+    end
 
---     -- send our clantag if it's different
---     if prev_tag ~= cur_tag and menu.clantag_toggle:get() then
---         hasCleared = false
---         send_clan_tag( cur_tag, cur_tag )
---         prev_tag = cur_tag
---     end
+    -- send our clantag if it's different
+    if prev_tag ~= cur_tag and menu.clantag_toggle:get() then
+        hasCleared = false
+        send_clan_tag( cur_tag, cur_tag )
+        prev_tag = cur_tag
+    end
 
---     if not hasCleared and not menu.clantag_toggle:get() then
---         hasCleared = true
---         send_clan_tag("","")
---     end
--- end
+    if not hasCleared and not menu.clantag_toggle:get() then
+        hasCleared = true
+        send_clan_tag("","")
+    end
+end
 
--- -- Clear clan-tag
--- local function on_shutdown()
---     send_clan_tag("","")
--- end
+-- Clear clan-tag
+local function on_shutdown()
+    send_clan_tag("","")
+end
 
 
 -- for k, v in pairs(vars.fonts.avaliable_fonts) do
@@ -693,10 +693,10 @@ end
 
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
--- callbacks.add(e_callbacks.EVENT,killChat,"player_death")
--- callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
+callbacks.add(e_callbacks.EVENT,killChat,"player_death")
+callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 -- callbacks.add(e_callbacks.PAINT, on_paint)
 -- callbacks.add(e_callbacks.PAINT, draw_indicators)
--- callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
+callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
 -- callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
 -- callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
