@@ -377,7 +377,7 @@ local vars = {
 --     end
 -- end
 
--- Clear clan-tag
+-- -- Clear clan-tag
 -- local function on_shutdown()
 --     send_clan_tag("","")
 -- end
