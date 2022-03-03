@@ -1,4 +1,3 @@
-return {
     client.log('boof.gg has cloud-loaded')
 
     local servers_community = {
@@ -360,6 +359,7 @@ return {
 
         return clantagTable
     end
+
     function on_paint(  )
         local local_plyr = entity_list.get_local_player( )
 
@@ -441,4 +441,3 @@ return {
     callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
     -- menu.add_button("quick server", "confirm", confirmServer)
     tellDiscord(false, true)
-}
