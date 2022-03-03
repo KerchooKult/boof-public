@@ -692,11 +692,11 @@ for k, v in pairs(vars.fonts.avaliable_fonts) do
 end
 
 
-callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
-callbacks.add(e_callbacks.EVENT,killChat,"player_death")
-callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
-callbacks.add(e_callbacks.PAINT, on_paint)
-callbacks.add(e_callbacks.PAINT, draw_indicators)
-callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
-callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
-callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
+-- callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
+-- callbacks.add(e_callbacks.EVENT,killChat,"player_death")
+-- callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
+-- callbacks.add(e_callbacks.PAINT, on_paint)
+-- callbacks.add(e_callbacks.PAINT, draw_indicators)
+-- callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
+-- callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
+-- callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
