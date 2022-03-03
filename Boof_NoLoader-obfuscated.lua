@@ -544,41 +544,41 @@ local function haloSay(event_info)
     end
 end
 
--- -- Server Picker
--- for k, v in pairs(servers_community) do
---     table.insert(servercomm_names, k)
--- end
+-- Server Picker
+for k, v in pairs(servers_community) do
+    table.insert(servercomm_names, k)
+end
 
--- for k, v in pairs(servers_2v2) do
---     table.insert(server2v2_names, k)
--- end
+for k, v in pairs(servers_2v2) do
+    table.insert(server2v2_names, k)
+end
 
--- local function connect(name, ip)
---     client.log_screen('Connecting to ' .. name .. ' [' .. ip .. '] ')
---     engine.execute_cmd('connect ' .. ip)
--- end
+local function connect(name, ip)
+    client.log_screen('Connecting to ' .. name .. ' [' .. ip .. '] ')
+    engine.execute_cmd('connect ' .. ip)
+end
 
--- local function SetVisibility(table, condition)
---     for k, v in pairs(table) do
---         if (type(v) == 'table') then
---             for j, i in pairs(v) do
---                 i:set_visible(condition)
---             end
---         else 
---             v:set_visible(condition)
---         end
---     end
--- end
+local function SetVisibility(table, condition)
+    for k, v in pairs(table) do
+        if (type(v) == 'table') then
+            for j, i in pairs(v) do
+                i:set_visible(condition)
+            end
+        else 
+            v:set_visible(condition)
+        end
+    end
+end
 
--- callbacks.add(e_callbacks.PAINT, function()
---     local toggle = ref.master:get()
---     local selection = ref.items.selection:get()
+callbacks.add(e_callbacks.PAINT, function()
+    local toggle = ref.master:get()
+    local selection = ref.items.selection:get()
 
---     SetVisibility(ref.items, toggle)
---     button:set_visible(toggle)
+    SetVisibility(ref.items, toggle)
+    button:set_visible(toggle)
 
---     ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
--- end)
+    ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
+end)
 
 -- CTAG
 local hasCleared = false
@@ -687,9 +687,9 @@ local function on_shutdown()
 end
 
 
--- for k, v in pairs(vars.fonts.avaliable_fonts) do
---     vars.fonts.font_ptr[k] = render.create_font(v, 26, 650, e_font_flags.ANTIALIAS, e_font_flags.DROPSHADOW)
--- end
+for k, v in pairs(vars.fonts.avaliable_fonts) do
+    vars.fonts.font_ptr[k] = render.create_font(v, 26, 650, e_font_flags.ANTIALIAS, e_font_flags.DROPSHADOW)
+end
 
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
@@ -698,5 +698,5 @@ callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 callbacks.add(e_callbacks.PAINT, on_paint)  
 -- callbacks.add(e_callbacks.PAINT, draw_indicators)
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
--- callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
--- callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
+callbacks.add(e_callbacks.AIMBOT_HIT, on_aimbot_hit)
+callbacks.add(e_callbacks.AIMBOT_MISS, on_aimbot_miss)
