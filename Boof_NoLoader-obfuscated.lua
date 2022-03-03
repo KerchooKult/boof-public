@@ -43,69 +43,69 @@ local vars = {
     amongUsMode = {"when hh is SUS :o","hh was voted off the ship...",user.name.." ejected the impostor (hh)","sus hh","hh faked his tasks!!","red sus","hh vented","hh was killed by the impostor (sus)","hh amog us"}
 }
 
--- -- Watermark
--- local motds = {"kys hh lmao","sit down and get some mutuals","hh is a boofer","doxxing you","1 lmao","wtf.","its boof or nothing","discord.gg/boof","die","ping spoofing","die","planets gay","now with shit mode!!","go back to minecraft","uninstall","alt+f4","shitter","discord.gg/boof","futurama stan","bruh","go to BEEEDDDDD","WOMBO COMBO","you're a rat."}
--- local motdNumber = client.random_int(1, #motds)
--- function on_draw_watermark()
---     if(menuItems.watermarkToxic:get()) then
---         menuItems.watermarkSelector:set_visible(false)
---     else
---         menuItems.watermarkSelector:set_visible(true)
---     end
+-- Watermark
+local motds = {"kys hh lmao","sit down and get some mutuals","hh is a boofer","doxxing you","1 lmao","wtf.","its boof or nothing","discord.gg/boof","die","ping spoofing","die","planets gay","now with shit mode!!","go back to minecraft","uninstall","alt+f4","shitter","discord.gg/boof","futurama stan","bruh","go to BEEEDDDDD","WOMBO COMBO","you're a rat."}
+local motdNumber = client.random_int(1, #motds)
+function on_draw_watermark()
+    if(menuItems.watermarkToxic:get()) then
+        menuItems.watermarkSelector:set_visible(false)
+    else
+        menuItems.watermarkSelector:set_visible(true)
+    end
 
---     local fps = client.get_fps()
---     local tickrate = client.get_tickrate()
---     local latency = math.floor(engine.get_latency(e_latency_flows.OUTGOING) * 800 + 0.5) or 0
+    local fps = client.get_fps()
+    local tickrate = client.get_tickrate()
+    local latency = math.floor(engine.get_latency(e_latency_flows.OUTGOING) * 800 + 0.5) or 0
 
---     if (menuItems.watermark_toggle:get() == true) then
---         if global_vars.cur_time() - vars.stored_cur_time > 3 then
---             -- run ur code
---             motdNumber = client.random_int(1, #motds)
---             vars.stored_cur_time = global_vars.cur_time()
---         end
+    if (menuItems.watermark_toggle:get() == true) then
+        if global_vars.cur_time() - vars.stored_cur_time > 3 then
+            -- run ur code
+            motdNumber = client.random_int(1, #motds)
+            vars.stored_cur_time = global_vars.cur_time()
+        end
 
---         local s = "broken code lmao"
---         if(menuItems.watermarkToxic:get() == true) then
---             text = " boof.gg" .. " | " .. motds[motdNumber]
---             s = string.gsub(text, "hh", user.name)
---             return s
---         else
---             s = "boof.gg" .. "aabbccddee"
+        local s = "broken code lmao"
+        if(menuItems.watermarkToxic:get() == true) then
+            text = " boof.gg" .. " | " .. motds[motdNumber]
+            s = string.gsub(text, "hh", user.name)
+            return s
+        else
+            s = "boof.gg" .. "aabbccddee"
 
---             if(menuItems.watermarkSelector:get("name")) then
---                 s = string.gsub(s,"aa"," | " ..user.name.." ["..user.uid.."]")
---             else
---                 s = string.gsub(s,"aa","")
---             end
+            if(menuItems.watermarkSelector:get("name")) then
+                s = string.gsub(s,"aa"," | " ..user.name.." ["..user.uid.."]")
+            else
+                s = string.gsub(s,"aa","")
+            end
 
---             if(menuItems.watermarkSelector:get("fps")) then
---                 s = string.gsub(s,"bb"," | "..fps.." fps")
---             else
---                 s = string.gsub(s,"bb","")
---             end
+            if(menuItems.watermarkSelector:get("fps")) then
+                s = string.gsub(s,"bb"," | "..fps.." fps")
+            else
+                s = string.gsub(s,"bb","")
+            end
 
---             if(menuItems.watermarkSelector:get("tick")) then
---                 s = string.gsub(s,"cc"," | "..tickrate.." tick")
---             else
---                 s = string.gsub(s,"cc","")
---             end
+            if(menuItems.watermarkSelector:get("tick")) then
+                s = string.gsub(s,"cc"," | "..tickrate.." tick")
+            else
+                s = string.gsub(s,"cc","")
+            end
     
---             if(menuItems.watermarkSelector:get("kills")) then
---                 s = string.gsub(s,"dd"," | "..vars.killCount.." kills")
---             else
---                 s = string.gsub(s,"dd","")
---             end
+            if(menuItems.watermarkSelector:get("kills")) then
+                s = string.gsub(s,"dd"," | "..vars.killCount.." kills")
+            else
+                s = string.gsub(s,"dd","")
+            end
 
---             if(menuItems.watermarkSelector:get("ping")) then
---                 s = string.gsub(s,"ee"," | "..latency.." ms")
---             else
---                 s = string.gsub(s,"ee","")
---             end
+            if(menuItems.watermarkSelector:get("ping")) then
+                s = string.gsub(s,"ee"," | "..latency.." ms")
+            else
+                s = string.gsub(s,"ee","")
+            end
 
---             return s
---         end
---     end
--- end
+            return s
+        end
+    end
+end
 
 -- -- Indicators
 -- -- local hideShots = menu.find("aimbot","general","exploits","hideshots")
@@ -382,7 +382,7 @@ local vars = {
 --     send_clan_tag("","")
 -- end
 
--- callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
+callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 -- callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 -- callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 -- callbacks.add(e_callbacks.PAINT, on_paint)
