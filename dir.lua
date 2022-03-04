@@ -434,7 +434,7 @@ local function on_shutdown()
     send_clan_tag("","")
 end
 
-function paint_function()
+local function paint_function()
     clan_tag_function()
     draw_indicators()
     server_picker()
@@ -444,4 +444,3 @@ callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
-callbacks.add(e_callbacks.PAINT, paint_function)
