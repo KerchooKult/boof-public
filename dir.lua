@@ -71,7 +71,7 @@ local menuItems = {
     -- Halo
     haloToggle = menu.add_checkbox("meme", "halo announcer", false),
     -- Logo Indicator
-    desyncIndicator = menu.add_checkbox("indicators (WIP)", "enable desync indicator", false),
+    desyncIndicator = menu.add_checkbox("indicators", "enable indicator hud", false),
 }
 
 local vars = {
