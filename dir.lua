@@ -436,9 +436,7 @@ local function on_shutdown()
 end
 
 function paint_function()
-    clan_tag_function()
-    draw_indicators()
-    server_picker()
+
 end
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
