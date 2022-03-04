@@ -153,7 +153,6 @@ end
 
 -- Indicators
 local hideShots = menu.find("aimbot","general","exploits","hideshots")
-client.log(hideShots:set(false))
 
 local function normalize(yaw) 
     return math.fmod(yaw + 180, 360) - 180;
@@ -316,7 +315,6 @@ local function SetVisibility(table, condition)
     end
 end
 
--- callbacks.add(e_callbacks.PAINT, function()
 function server_picker()
     local toggle = ref.master:get()
     local selection = ref.items.selection:get()
@@ -326,7 +324,6 @@ function server_picker()
 
     ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
 end
--- end)
 
 -- CTAG
 local hasCleared = false
