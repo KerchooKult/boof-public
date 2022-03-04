@@ -154,7 +154,6 @@ function on_draw_watermark()
 end
 
 -- Indicators
-local hideShots = menu.find("aimbot","general","exploits","hideshots")
 
 local function normalize(yaw) 
     return math.fmod(yaw + 180, 360) - 180;
@@ -165,6 +164,7 @@ end
 
 function draw_indicators()
     if(engine.is_in_game() and menuItems.desyncIndicator:get()) then
+        local hideShots = menu.find("aimbot","general","exploits","hideshots")
         max_desync = math.abs( antiaim.get_max_desync_range( ) )
         cur_desync = math.floor( math.abs( normalize( antiaim.get_fake_angle( ) - antiaim.get_real_angle( ) ) ) )
         -- boof logo
