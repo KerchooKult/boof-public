@@ -362,7 +362,7 @@ function split_str_into_chars(str)
     return clantagTable
 end
 
-function on_paint(  )
+function clan_tag_function(  )
     local local_plyr = entity_list.get_local_player( )
 
     if not local_plyr then
@@ -436,7 +436,7 @@ local function on_shutdown()
 end
 
 function paint_function()
-    on_paint()
+    clan_tag_function()
     draw_indicators()
     server_picker()
 end
