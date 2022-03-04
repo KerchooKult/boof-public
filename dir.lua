@@ -317,13 +317,15 @@ local function SetVisibility(table, condition)
 end
 
 -- callbacks.add(e_callbacks.PAINT, function()
---     local toggle = ref.master:get()
---     local selection = ref.items.selection:get()
+function server_picker()
+    local toggle = ref.master:get()
+    local selection = ref.items.selection:get()
 
---     SetVisibility(ref.items, toggle)
---     button:set_visible(toggle)
+    SetVisibility(ref.items, toggle)
+    button:set_visible(toggle)
 
---     ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
+    ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
+end
 -- end)
 
 -- CTAG
@@ -431,6 +433,12 @@ end
 -- -- Clear clan-tag
 local function on_shutdown()
     send_clan_tag("","")
+end
+
+function paint_function()
+    on_paint()
+    draw_indicators()
+    server_picker()
 end
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
