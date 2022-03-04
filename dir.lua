@@ -435,9 +435,10 @@ local function on_shutdown()
 end
 
 function paint_function()
-    clan_tag_function()
-    draw_indicators()
-    server_picker()
+    -- clan_tag_function()
+    -- draw_indicators()
+    -- server_picker()
+    client.log('paint func')
 end
 
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
