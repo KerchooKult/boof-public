@@ -1,6 +1,7 @@
 client.log('boof.gg has cloud-loaded')
 
 local servers_community = {
+    ['Chair | Scout'] = '74.91.113.23:27015',
     ['Heretic | East'] = '74.91.125.35:27015',
     ['Heretic | West'] = '64.94.101.122:27015',
     ['Big Steppa | DM'] = '74.91.124.24:27015',
@@ -45,6 +46,11 @@ local ref = {
     },
 }
 
+local function connect(name, ip)
+    client.log_screen('Connecting to ' .. name .. ' [' .. ip .. '] ')
+    engine.execute_cmd('connect ' .. ip)
+end
+
 local function on_button()
     local selection = ref.items.selection:get()
 
@@ -82,10 +88,10 @@ local vars = {
     indicator_font2 = render.create_font( "Tahoma", 60, 700, e_font_flags.ANTIALIAS),
     degrees_font = render.create_font("Verdana", 30, 700, e_font_flags.ANTIALIAS, e_font_flags.OUTLINE),
     flags_font = render.create_font("Verdana", 35, 700, e_font_flags.ANTIALIAS, e_font_flags.OUTLINE),
-    boofMode = {"hh is my dog, now bark for me","Homo is by choice, that is why they are vile and guilty","hdf dog","is your monitor on?","lmao get fucked hh","retard","who r u hh","no mutuals hh","how much did you pay for that hh lmao","enter the seated position, hh","hh pov:","obv u never touched a woman lmao","boofd on","prim moment","just hit a clip on hh","pov not using prim","first I do skeet now i do yous girlfren","Pushin p ? , no you get headshot.","i kill skeet, now i kill u.","say hi to allah for me hh"},
-    friendlyMode = {"great game hh! :)","hey man it was good playing with you!!","with love <3 from "..user.name,"hey man! nice cheat :)","hh awesome config. good playing with you :D","epic fight hh! had fun","good try!","almost there hh...","you did great today!","hh... YOU ARE VALUED! :)","Thank you for the wonderful fight!","We should play again sometime :D","Friend request sent! :)","You are an amazing HVHer hh :D"},
+    boofMode = {"hh is my dog, now bark for me","Homo is by choice, that is why they are vile and guilty","hdf dog","is your monitor on?","lmao get fucked hh","retard","who r u hh","no mutuals hh","how much did you pay for that hh lmao","enter the seated position, hh","hh pov:","obv u never touched a woman lmao","boofd on","prim moment","just hit a clip on hh","pov not using prim","first I do skeet now i do yous girlfren","Pushin p ? , no you get headshot.","i kill skeet, now i kill u.","say hi to allah for me hh","rest in piss hh"},
+    friendlyMode = {"great game hh! :)","hey man it was good playing with you!!","with love <3 from "..user.name,"hey man! nice cheat :)","hh awesome config. good playing with you :D","epic fight hh! had fun","good try!","almost there hh...","you did great today!","hh... YOU ARE VALUED! :)","Thank you for the wonderful fight!","We should play again sometime :D","Friend request sent! :)","You are an amazing HVHer hh :D","Excellent try! Better luck next time :)","You put up a valiant effort!!","Welcome to the community! I can tell you are new :)"},
     russianMode = {"козёл lit", "дура","дурак", "курва", "шлюха", "отвянь!", "пиздуй отсюда", "на три буквы"},
-    gayMode = {"hh was fucked roughly by large bbc","hh gay","hh kinda hot tho",user.name.." matched with hh","god ur hot","suck my dick zaddy","ugly ass","call me later bb hh :)","hh go back to gay porn"},
+    gayMode = {"hh was fucked roughly by large bbc","hh gay","hh kinda hot tho",user.name.." matched with hh","god ur hot","suck my dick zaddy","ugly ass","call me later bb hh :)","hh go back to gay porn","send me ur number bb","anal"},
     amongUsMode = {"when hh is SUS :o","hh was voted off the ship...",user.name.." ejected the impostor (hh)","sus hh","hh faked his tasks!!","red sus","hh vented","hh was killed by the impostor (sus)","hh amog us"}
 }
 
@@ -297,11 +303,6 @@ end
 
 for k, v in pairs(servers_2v2) do
     table.insert(server2v2_names, k)
-end
-
-local function connect(name, ip)
-    client.log_screen('Connecting to ' .. name .. ' [' .. ip .. '] ')
-    engine.execute_cmd('connect ' .. ip)
 end
 
 local function SetVisibility(table, condition)
