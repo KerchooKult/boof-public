@@ -444,6 +444,6 @@ end
 callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
--- callbacks.add(e_callbacks.PAINT, on_paint)
+callbacks.add(e_callbacks.PAINT, paint_function)
 -- callbacks.add(e_callbacks.PAINT, draw_indicators)
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
