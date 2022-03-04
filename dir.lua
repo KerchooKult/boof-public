@@ -52,6 +52,8 @@ local function on_button()
     connect(name, selection == 1 and servers_community[name] or servers_2v2[name])
 end
 
+local button = menu.add_button('picker', 'connect', on_button)
+
 local menuItems = {
     -- Welcome Text
     text = menu.add_text("welcome", "Welcome to boof.gg, " .. user.name .. " [".. user.uid .."]"),
