@@ -316,15 +316,15 @@ local function SetVisibility(table, condition)
     end
 end
 
-callbacks.add(e_callbacks.PAINT, function()
-    local toggle = ref.master:get()
-    local selection = ref.items.selection:get()
+-- callbacks.add(e_callbacks.PAINT, function()
+--     local toggle = ref.master:get()
+--     local selection = ref.items.selection:get()
 
-    SetVisibility(ref.items, toggle)
-    button:set_visible(toggle)
+--     SetVisibility(ref.items, toggle)
+--     button:set_visible(toggle)
 
-    ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
-end)
+--     ref.items.picker:set_items(selection == 1 and servercomm_names or server2v2_names)
+-- end)
 
 -- CTAG
 local hasCleared = false
@@ -439,4 +439,3 @@ callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 -- callbacks.add(e_callbacks.PAINT, on_paint)
 -- callbacks.add(e_callbacks.PAINT, draw_indicators)
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
-menu.add_button("quick server", "confirm", confirmServer)
