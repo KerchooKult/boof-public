@@ -99,6 +99,13 @@ local vars = {
 local motds = {"kys hh lmao","sit down and get some mutuals","hh is a boofer","doxxing you","1 lmao","wtf.","its boof or nothing","discord.gg/boof","die","ping spoofing","die","planets gay","now with shit mode!!","go back to minecraft","uninstall","alt+f4","shitter","discord.gg/boof","futurama stan","bruh","go to BEEEDDDDD","WOMBO COMBO","you're a rat."}
 local motdNumber = client.random_int(1, #motds)
 function on_draw_watermark()
+
+    if(engine.is_in_game() and engine.is_connected()) then
+        clan_tag_function()
+        draw_indicators()
+    end
+    server_picker()
+
     if(menuItems.watermarkToxic:get()) then
         menuItems.watermarkSelector:set_visible(false)
     else
@@ -434,17 +441,8 @@ local function on_shutdown()
     send_clan_tag("","")
 end
 
-local function paint_function()
-    if(engine.is_in_game() and engine.is_connected()) then
-        clan_tag_function()
-        draw_indicators()
-    end
-    on_draw_watermark()
-    server_picker()
-end
 
--- callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
+callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
-callbacks.add(e_callbacks.DRAW_WATERMARK, paint_function)
