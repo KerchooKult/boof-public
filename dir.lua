@@ -439,10 +439,11 @@ local function paint_function()
         clan_tag_function()
         draw_indicators()
     end
+    on_draw_watermark()
     server_picker()
 end
 
-callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
+-- callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
