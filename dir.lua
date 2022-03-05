@@ -435,8 +435,10 @@ local function on_shutdown()
 end
 
 local function paint_function()
-    clan_tag_function()
-    draw_indicators()
+    if(engine.is_in_game() and engine.is_connected()) then
+        clan_tag_function()
+        draw_indicators()
+    end
     server_picker()
 end
 
@@ -444,3 +446,4 @@ callbacks.add(e_callbacks.DRAW_WATERMARK, on_draw_watermark)
 callbacks.add(e_callbacks.EVENT,killChat,"player_death")
 callbacks.add(e_callbacks.EVENT,haloSay,"player_death")
 callbacks.add(e_callbacks.SHUTDOWN, on_shutdown)
+callbacks.add(e_callbacks.DRAW_WATERMARK, paint_function)
