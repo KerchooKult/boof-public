@@ -1,5 +1,5 @@
 client.log('boof.gg has cloud-loaded')
-
+client.log(test)
 local servers_community = {
     ['Chair | Scout'] = '74.91.113.23:27015',
     ['Heretic | East'] = '74.91.125.35:27015',
